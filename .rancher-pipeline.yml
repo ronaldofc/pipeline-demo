@@ -9,7 +9,7 @@ stages:
       image: busybox
       shellScript: echo ${FIRST_KEY} && echo ${SECOND_KEY}
     env:
-      FIRST_KEY: Hi
+      FIRST_KEY: Hiii
       SECOND_KEY: Monkeys
 timeout: 60
 notification:
