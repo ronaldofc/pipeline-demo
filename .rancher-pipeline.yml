@@ -1,0 +1,22 @@
+stages:
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./k8s/deployment.yaml
+- name: Build something
+  steps:
+  - runScriptConfig:
+      image: busybox
+      shellScript: echo ${FIRST_KEY} && echo ${SECOND_KEY}
+    env:
+      FIRST_KEY: Hi
+      SECOND_KEY: Monkeys
+timeout: 60
+notification:
+  recipients:
+  - recipient: '#rancher-notifications'
+    notifier: c-55nbm:n-zp4hf
+  condition:
+  - Success
+  - Changed
+  - Failed
