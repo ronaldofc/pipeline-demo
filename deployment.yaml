@@ -33,6 +33,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: hello-v1-svc
+  namespace: pipeline-demo
 spec:
   selector:
     app: hello-v1
