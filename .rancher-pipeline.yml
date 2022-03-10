@@ -1,22 +1,21 @@
 stages:
+- name: Build
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: pipeline-demo:${CICD_GIT_COMMIT}
+      pushRemote: True
+      registry: rcr.citwdd.net
+    env:
+      PLUGIN_DEBUG: "true"
+  when:
+    branch:
+      include:
+      - main     
 - name: Deploy
   steps:
   - applyYamlConfig:
-      path: ./k8s/deployment.yaml
-- name: Build something
-  steps:
-  - runScriptConfig:
-      image: busybox
-      shellScript: echo ${FIRST_KEY} && echo ${SECOND_KEY}
-    env:
-      FIRST_KEY: Hiii
-      SECOND_KEY: Monkeys
+      path: ./deployment.yaml
 timeout: 60
-notification:
-  recipients:
-  - recipient: '#rancher-notifications'
-    notifier: c-55nbm:n-zp4hf
-  condition:
-  - Success
-  - Changed
-  - Failed
+notification: {}
