@@ -5,14 +5,14 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: pipeline-demo:${CICD_GIT_COMMIT}
-      pushRemote: True
+      pushRemote: true
       registry: rcr.citwdd.net
     env:
       PLUGIN_DEBUG: "true"
   when:
     branch:
       include:
-      - main     
+      - main
 - name: Deploy
   steps:
   - applyYamlConfig:
