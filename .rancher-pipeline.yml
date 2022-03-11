@@ -6,7 +6,7 @@ stages:
       buildContext: .
       tag: pipeline-demo/demo:${CICD_GIT_COMMIT}
       pushRemote: true
-      registry: rcr-citwdd-net
+      registry: rcr.citwdd.net
     env:
       PLUGIN_DEBUG: "true"
   when:
