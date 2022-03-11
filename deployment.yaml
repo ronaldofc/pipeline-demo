@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-v1
+  name: pipeline-demo-v1
   namespace: pipeline-demo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: hello-v1
+      app: pipeline-demo-v1
   template:
     metadata:
       labels:
-        app: hello-v1
+        app: pipeline-demo-1
     spec:
       containers:
-      - name: hello
-        image: gcr.io/google-samples/hello-app:1.0
+      - name: pipeline-demo
+        image: rcr.citwdd.net/pipeline-demo/demo:${CICD_GIT_COMMIT}
         imagePullPolicy: IfNotPresent        
         ports:
         - containerPort: 8080
@@ -26,18 +26,3 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "100m"
-
----
-
-kind: Service
-apiVersion: v1
-metadata:
-  name: hello-v1-svc
-  namespace: pipeline-demo
-spec:
-  selector:
-    app: hello-v1
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
