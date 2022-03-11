@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pipeline-demo-v1
+  name: hello-v1
   namespace: pipeline-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pipeline-demo-v1
+      app: hello-v1
   template:
     metadata:
       labels:
-        app: pipeline-demo-1
+        app: hello-v1
     spec:
       containers:
-      - name: pipeline-demo
+      - name: hello
         image: rcr.citwdd.net/pipeline-demo/demo:${CICD_GIT_COMMIT}
         imagePullPolicy: IfNotPresent        
         ports:
