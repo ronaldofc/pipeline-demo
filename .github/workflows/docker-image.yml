@@ -32,3 +32,6 @@ jobs:
 
     - name: Print image url
       run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
+      
+    - name: Print test message
+      run: echo "test by Ronaldo FC"      
