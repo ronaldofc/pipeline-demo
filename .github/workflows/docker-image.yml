@@ -1,5 +1,8 @@
-name: Build and Push Image
-on: [ push ]
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
 
 jobs:
   build:
@@ -32,3 +35,6 @@ jobs:
 
     - name: Print image url
       run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
+      
+    - name: update file
+      run: echo "new line" >> notes.txt      
