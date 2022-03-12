@@ -30,5 +30,8 @@ jobs:
         username: api-vima
         password: ${{ secrets.VIMA_REGISTRY }}
 
+    - name: check for changes
+      run: git status
+
     - name: Print image url
       run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
