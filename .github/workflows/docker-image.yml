@@ -37,4 +37,4 @@ jobs:
       run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
       
     - name: update file
-      run: echo "new line" >> notes.txt      
+      run: echo "new line" >> notes.txt ; git add notes.txt ; git commit -m "test" ; git push    
