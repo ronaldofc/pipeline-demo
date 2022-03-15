@@ -1,0 +1,38 @@
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and push image
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build Image
+      id: build-image
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: my-app
+        tags: latest ${{ github.sha }}
+        containerfiles: |
+          ./Containerfile
+    # Podman Login action (https://github.com/redhat-actions/podman-login) also be used to log in,
+    # in which case 'username' and 'password' can be omitted.
+    - name: Push To rcr.citwdd.net
+      id: push-to-quay
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry: rcr.citwdd.net/pipeline-demo
+        username: api-vima
+        password: ${{ secrets.VIMA_REGISTRY }}
+
+    - name: Print image url
+      run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
