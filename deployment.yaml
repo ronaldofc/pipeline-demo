@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: rcr.citwdd.net/pipeline-demo/demo:latest   #${CICD_GIT_COMMIT}
+        image: rcr.citwdd.net/backend-repository/vima:latest 
         imagePullPolicy: IfNotPresent        
         ports:
         - containerPort: 8080
