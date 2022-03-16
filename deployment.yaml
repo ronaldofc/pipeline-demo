@@ -1,10 +1,11 @@
+#   image: rcr.citwdd.net/backend-repository/vima:latest 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-v1
   namespace: pipeline-demo
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: hello-v1
@@ -15,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: rcr.citwdd.net/backend-repository/vima:latest 
+        image: gcr.io/google-samples/hello-app:1.0
         imagePullPolicy: IfNotPresent        
         ports:
         - containerPort: 8080
@@ -26,3 +27,4 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "100m"
+
